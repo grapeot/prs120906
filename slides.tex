@@ -1,0 +1,146 @@
+\documentclass[12pt]{beamer}
+\author{Yan Wang}
+\title{Paper reading seminar}
+\subtitle{}
+\usetheme{Malmoe}
+\setbeamertemplate{navigation symbols}{}
+\newcommand*\oldmacro{}%
+\let\oldmacro\insertshorttitle%
+\renewcommand*\insertshorttitle{%
+\oldmacro\hfill%
+\insertframenumber\,/\,\inserttotalframenumber}
+
+\begin{document}
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+\begin{frame}{Ensemble of Exemplar-SVMs for Object Detection and Beyond}
+	\begin{itemize}
+		\item Motivation
+		\begin{itemize}
+			\item ``Semantic classifier'' hard because things are not visually similar
+			\item Build ``exemplar classifier'' to do instance classification and then fuse the scores
+			\item SVM-style extension of KNN-based classification
+		\end{itemize}
+		\item New problem
+		\begin{itemize}
+			\item Detection dataset $\Rightarrow$ matching instance $\Rightarrow$ associated metadata (class, label, 3D model, segmentation, ...)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Approach}
+	\begin{itemize}
+		\item Exemplar-SVM
+		\begin{itemize}
+			\item Corresponds to every (detection) instance
+			\item Positive training sample: detection instance
+			\item Negative training sample: all the other instances
+			\item HoG + Linear SVM
+			\item Use non-maximum suppression in testing phrase
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Approach}
+	\begin{itemize}
+		\item Calibration
+		\begin{itemize}
+			\item The individually trained SVMs have different scales
+			\item Cannot be integrated for final result directly
+			\item Calibration to normalize their score
+			\item For every Exemplar-SVM
+			\[f(x|w_E,\alpha_E,\beta_E) = \frac{1}{1 + e^{-\alpha_E(W_E^Tx-\beta_E)}}\]
+			\includegraphics[width=0.8\textwidth]{esvm-calibration.png}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Approach}
+	\begin{itemize}
+		\item Calibration
+		\begin{itemize}
+			\item Sample collection
+			\begin{itemize}
+				\item Agreed samples (w/in one class?) $\Rightarrow$ positive samples
+				\item Other samples %\Rightarrow$ negative samples
+			\end{itemize}
+		\end{itemize}
+		\item Test
+		\begin{itemize}
+			\item Sliding window + HoG
+			\item Individual test score
+			\item Calibrated test score
+			\item Sum?
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Data-driven Visual Similarity for Cross-domain Image Matching}
+	\begin{itemize}
+		\item Problem: cross-domain image matching
+		\item Motivation
+		\begin{itemize}
+			\item Visual similarity metric is hard to design
+			\item Directly use the (unlabeled) data
+			\item Training a discriminative classifier to discover important parts of an image $\Rightarrow$ learn a similarity metric from data
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Approach}
+	\begin{itemize}
+		\item Train an SVM for every image
+		\begin{itemize}
+			\item Pos: one image with shifting/rotating/scaling
+			\item Neg: (millions of) sliding windows from (10K) randomly sampled Flickr images
+			\item Feature: grid-like features with high enough dimensions, like HoG or Dense SIFT
+		\end{itemize}
+		\item Technical details
+		\begin{itemize}
+			\item Efficiency: SVM only keeps support vectors in the negative part $\Rightarrow$ efficient in testing phrase
+			\item ``Sample expansion'': explore more negative samples with current trained $w$
+			\item Ranking: didn't find in the paper
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Experiments}
+	\begin{itemize}
+		\item Perform well in saliency detection
+		\item Image-Image matching
+		\begin{itemize}
+			\item Dataset: INRIA Holiday Dataset to ensure the exact query instance exists in the dataset
+			\item Baselines: GIST, Tiny images, spatial pyramid
+			\item Measurement: true positive rate in top 100 results
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Experiments}
+	\begin{itemize}
+		\item Sketch-Image matching
+		\begin{itemize}
+			\item Dataset: 25 car sketch + 25 bike sketch against PASCAL VOC 2007 and SBIR Dataset
+			\item Baselines: proposed algo. with different dataset size
+			\item Measurement: mAP of top K
+		\end{itemize}
+		\item Point-Image matching (qualitative)
+		\begin{itemize}
+			\item Dataset: self-collected, 50 outdoor paintings agains 5K GPS-enabled images within 50 miles and 5K random images
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Applications}
+	\begin{itemize}
+		\item Scene completion
+		\item Internet re-photography
+		\item Painting2GPS
+		\item Visual Scene Exploration
+	\end{itemize}
+\end{frame}
+
+\end{document}
