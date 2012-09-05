@@ -37,7 +37,7 @@
         \begin{itemize}
             \item Mine important parts for image classification
             \item Li Fei-Fei's group in CVPR 11
-            \item [Fig. 1]
+            \includegraphics[width=0.6\textwidth]{fig1.png}
         \end{itemize}
         \item Assumption
         \begin{itemize}
@@ -53,7 +53,7 @@
         \begin{itemize}
             \item Sparse coding: $u_j \in \mathbb{R}^V$. $u_{jk}$
             \item Pooling: $\max_j \{u_{jk}\}$
-            \item Classification: $\hat{y} = \sgn \Big( w_k \max_j \{u_{jk}\} + b \Big)$
+            \item Classification: $\hat{y} = \mathop{sgn} \Big( w_k \max_j \{u_{jk}\} + b \Big)$
         \end{itemize}
         \item Support Region $R_s$
         \begin{itemize}
@@ -67,22 +67,36 @@
 \begin{frame}{Approach}
     \begin{itemize}
         \item An efficient (DP-like) way to detect such regions
-        \[J(R_p, R_q) = \sum_k w_k \Big( \max_{\{j|P_j\in R_p\}} \{u_{jk}\} - \max_{\{j|P_j\in R_p-R_q\}} \{u_{jk}\} \Big)\]
+        \[ J(R_p, R_q) = \sum_k w_k \Big( \max_{\{j|P_j\in R_p\}} \{u_{jk}\} - \max_{\{j|P_j\in R_p-R_q\}} \{u_{jk}\} \Big) \]
         \item Don't really know what it means... The larger, the better? $R_q \subset R_p$
         \[ K(I, R_s) \geq S_0, S_0 = \sum_k \max_j \{u_{jk}\} + b \]
         \[ J(I, R_t) = J(I, R_{t - 1} + J(I - R_{t - 1}, P_t) \]
         \item Iteration way. Start from $P_0$, $R_t = R_{t - 1} \cup \hat{P}_t$
-        \[\hat{P}_t  = \arg \max_{P_t \in \text{boundary}\{R_{t-1}\}}} J(I - R_{t - 1}, P_t\]
+        \[ \hat{P}_t  = \arg \max_{P_t \in \text{boundary}\{R_{t-1}\}} J(I - R_{t - 1}, P_t) \]
     \end{itemize}
 \end{frame}
 
 \begin{frame}{Applications}
     \begin{itemize}
         \item Predict the failure mode of classifiers
-        \item [Fig.2]
+        \medskip
+        \includegraphics[width=0.6\textwidth]{fig2.png} \\
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Applications}
+    \begin{itemize}
         \item Understand the classification and discover database bias
-        \item [Fig.3]
-        \item [Fig.5]
+        \medskip
+        \includegraphics[width=0.6\textwidth]{fig3.png} \\
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Applications}
+    \begin{itemize}
+        \item Understand the classification and discover database bias
+        \medskip
+        \includegraphics[width=0.6\textwidth]{fig5.png} \\
     \end{itemize}
 \end{frame}
 
@@ -93,8 +107,18 @@
             \item User annotates bad support regions $\Rightarrow$ remove the regions, put remaining image as a positive sample
             \item Cross-dataset validation: context won't help, must focus on the objects themselves
         \end{itemize}
-        \item [Fig.6]
-        \item [Tbl.1]
+        \includegraphics[width=0.6\textwidth]{fig6.png} \\
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Applications}
+    \begin{itemize}
+        \item Build better classifiers
+        \begin{itemize}
+            \item User annotates bad support regions $\Rightarrow$ remove the regions, put remaining image as a positive sample
+            \item Cross-dataset validation: context won't help, must focus on the objects themselves
+        \end{itemize}
+        \includegraphics[width=0.6\textwidth]{tbl1.png} \\
     \end{itemize}
 \end{frame}
 
