@@ -70,7 +70,7 @@
         \[ J(R_p, R_q) = \sum_k w_k \Big( \max_{\{j|P_j\in R_p\}} \{u_{jk}\} - \max_{\{j|P_j\in R_p-R_q\}} \{u_{jk}\} \Big) \]
         \item Don't really know what it means... The larger, the better? $R_q \subset R_p$
         \[ K(I, R_s) \geq S_0, S_0 = \sum_k \max_j \{u_{jk}\} + b \]
-        \[ J(I, R_t) = J(I, R_{t - 1} + J(I - R_{t - 1}, P_t) \]
+        \[ J(I, R_t) = J(I, R_{t - 1}) + J(I - R_{t - 1}, P_t) \]
         \item Iteration way. Start from $P_0$, $R_t = R_{t - 1} \cup \hat{P}_t$
         \[ \hat{P}_t  = \arg \max_{P_t \in \text{boundary}\{R_{t-1}\}} J(I - R_{t - 1}, P_t) \]
     \end{itemize}
@@ -88,7 +88,7 @@
     \begin{itemize}
         \item Understand the classification and discover database bias
         \medskip
-        \includegraphics[width=0.6\textwidth]{fig3.png} \\
+        { \includegraphics[width=0.6\textwidth]{fig3.png} } \\
     \end{itemize}
 \end{frame}
 
@@ -96,7 +96,7 @@
     \begin{itemize}
         \item Understand the classification and discover database bias
         \medskip
-        \includegraphics[width=0.6\textwidth]{fig5.png} \\
+        { \includegraphics[width=0.6\textwidth]{fig5.png} } \\
     \end{itemize}
 \end{frame}
 
@@ -129,6 +129,7 @@
 			\item ``Semantic classifier'' hard because things are not visually similar
 			\item Build ``exemplar classifier'' to do instance classification and then fuse the scores
 			\item SVM-style extension of KNN-based classification
+            \item (Another extreme from ``Objectiveness'')
 		\end{itemize}
 		\item New problem
 		\begin{itemize}
@@ -179,7 +180,7 @@
 			\item Sliding window + HoG
 			\item Individual test score
 			\item Calibrated test score
-			\item Sum?
+			\item Sum? Max?
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -207,7 +208,7 @@
 		\item Technical details
 		\begin{itemize}
 			\item Efficiency: SVM only keeps support vectors in the negative part $\Rightarrow$ efficient in testing phrase
-			\item ``Sample expansion'': explore more negative samples with current trained $w$
+			\item ``Sample expansion'': explore hard negative samples with current trained $w$
 			\item Ranking: didn't find in the paper
 		\end{itemize}
 	\end{itemize}
@@ -233,7 +234,7 @@
 			\item Baselines: proposed algo. with different dataset size
 			\item Measurement: mAP of top K
 		\end{itemize}
-		\item Point-Image matching (qualitative)
+		\item Paint-Image matching (qualitative)
 		\begin{itemize}
 			\item Dataset: self-collected, 50 outdoor paintings agains 5K GPS-enabled images within 50 miles and 5K random images
 		\end{itemize}
