@@ -249,4 +249,51 @@
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{Backup slides}
+\end{frame}
+
+\begin{frame}{Combining Randomization and Discrimination for Fine-Grained Image Categorization}
+    \begin{itemize}
+        \item Motivation
+        \begin{itemize}
+            \item Fine-grained image categorization
+            \item Bird species
+            \item Human activity classification
+        \end{itemize}
+        \item Intuition
+        \begin{itemize}
+            \item Dense sampling $\Rightarrow$ patches
+            \item Correlation among patches
+            \item Random forest + SVM
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Approach}
+    \begin{itemize}
+        \item Dense sampling \\
+        \medskip
+        { \includegraphics[width=0.7\textwidth]{fffig2.png} } \\
+        \item Feature
+        \begin{itemize}
+            \item Single patch: BoW
+            \item Patch pair: concatenation/intersection/absolute of difference of BoW histogram
+        \end{itemize} 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Approach}
+    \begin{itemize}
+        \item Random forest + SVM \\
+        \medskip
+        { \includegraphics[width=0.7\textwidth]{fffig3.png} }
+        \begin{itemize}
+            \item Randomly select patches (or patch pairs) + SVM
+            \item Train random forest with information gain
+            \item Use ``ancestor'' features
+            \item Q: invariance?
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
 \end{document}
