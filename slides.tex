@@ -122,6 +122,26 @@
     \end{itemize}
 \end{frame}
 
+\begin{frame}{Discussions}
+    \begin{itemize}
+        \item Is the new classifier simply getting rid of the contexts?
+        \begin{itemize}
+            \item That depends on how to define the ``bad support regions''
+            \item Define ``good support regions''
+            \begin{itemize}
+                \item On the object itself
+                \item On ``reasonable'' contexts (like boat & river)
+            \end{itemize}
+            \item $\Rightarrow$ include less-bias contexts in the new classifier
+        \end{itemize}
+        \item Is it possible to get rid of the human label?
+        \begin{itemize}
+            \item Without the ``good context'', yes. Directly use the ground-truth objects
+            \item Otherwise need a way to determine whether a support region is ``good''
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
 \begin{frame}{Ensemble of Exemplar-SVMs for Object Detection and Beyond}
 	\begin{itemize}
 		\item Motivation
