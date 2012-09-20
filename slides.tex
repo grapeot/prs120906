@@ -171,8 +171,9 @@
 		\begin{itemize}
 			\item Sample collection
 			\begin{itemize}
-				\item Agreed samples (w/in one class?) $\Rightarrow$ positive samples
-				\item Other samples %\Rightarrow$ negative samples
+				\item Run individual SVMs on the held-out test set
+                \item Detected rectangles with large overlap with ground-truth $\Rightarrow$ positive samples
+				\item With small overlap with ground-truth $\Rightarrow$ negative samples
 			\end{itemize}
 		\end{itemize}
 		\item Test
