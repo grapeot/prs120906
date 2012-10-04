@@ -1,6 +1,3 @@
-Paper reading seminar for 2012-09-06
-=========
-
 This time we will introduce 3 papers within one hour, all related with data visualization or explanation in vision problems.
 
  * L. Liu and L. Wang, “What has my classifier learned? Visualizing the classification rules of bag-of-feature model by support region detection,” CVPR 2012
